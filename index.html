@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eric's Sports Corner</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="title">Eric's Sports Corner</h1>
+            <div class="header-controls">
+                <span class="last-updated" id="lastUpdated">Never updated</span>
+                <button class="btn btn-refresh" id="refreshBtn">Refresh</button>
+                <button class="btn btn-settings" id="settingsBtn">Settings</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <button class="modal-close" id="closeSettings">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="settings-info">
+                    Enter your API-Football RapidAPI key. Get one free at 
+                    <a href="https://rapidapi.com/api-sports/api/api-football" target="_blank">RapidAPI</a>.
+                    Leave blank to use mock data.
+                </p>
+                <label for="apiKeyInput">API Key:</label>
+                <input type="text" id="apiKeyInput" placeholder="Enter API key" />
+                <button class="btn btn-primary" id="saveApiKey">Save</button>
+                <p class="settings-note">
+                    Note: API responses are cached for 10 minutes to reduce calls.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Usage Warning Banner -->
+    <div class="warning-banner" id="warningBanner" style="display: none;">
+        <div class="container">
+            <span id="warningText"></span>
+            <button class="banner-close" id="closeBanner">&times;</button>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-sport="football">Football</button>
+                <button class="nav-tab" data-sport="rugby">Rugby</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- League Selector (Football only) -->
+    <div class="league-selector" id="leagueSelector">
+        <div class="container">
+            <select id="leagueDropdown" class="league-dropdown">
+                <option value="39">English Premier League</option>
+                <option value="135">Italian Serie A</option>
+                <option value="61">French Ligue 1</option>
+                <option value="78">German Bundesliga</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Loading State -->
+            <div class="loading-state" id="loadingState">
+                <div class="spinner"></div>
+                <p>Loading data...</p>
+            </div>
+
+            <!-- Error State -->
+            <div class="error-state" id="errorState">
+                <p>⚠️ Failed to load data. Using mock data instead.</p>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="content-grid" id="contentGrid">
+                <!-- Standings Card -->
+                <div class="card">
+                    <h2 class="card-title">Standings</h2>
+                    <div class="standings-container" id="standingsContainer">
+                        <!-- Standings table will be rendered here -->
+                    </div>
+                </div>
+
+                <!-- Matches Card -->
+                <div class="card">
+                    <h2 class="card-title">Fixtures & Results</h2>
+                    
+                    <!-- Upcoming Matches -->
+                    <div class="matches-section">
+                        <h3 class="section-title">Upcoming Fixtures</h3>
+                        <div class="matches-container" id="upcomingMatches">
+                            <!-- Upcoming matches will be rendered here -->
+                        </div>
+                    </div>
+
+                    <!-- Recent Results -->
+                    <div class="matches-section">
+                        <h3 class="section-title">Recent Results</h3>
+                        <div class="matches-container" id="recentResults">
+                            <!-- Recent results will be rendered here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Player Stats Card (Football only) -->
+                <div class="card card-full" id="playerStatsCard">
+                    <h2 class="card-title">Player Statistics</h2>
+                    
+                    <div class="player-stats-grid">
+                        <!-- Top Scorers -->
+                        <div class="player-stats-section">
+                            <h3 class="section-title">Top Scorers</h3>
+                            <div class="player-stats-container" id="topScorers">
+                                <!-- Top scorers will be rendered here -->
+                            </div>
+                        </div>
+
+                        <!-- Top Assists -->
+                        <div class="player-stats-section">
+                            <h3 class="section-title">Most Assists</h3>
+                            <div class="player-stats-container" id="topAssists">
+                                <!-- Top assists will be rendered here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
